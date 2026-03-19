@@ -77,7 +77,7 @@ class InferenceTests(unittest.TestCase):
 
     def test_speed(self):
         """
-        Placeholder test to compare inference speed between TorchScript and the standard model.
+        Placeholder smoke check to compare inference speed between TorchScript and the standard model.
         Currently unimplemented.
 
         :return: None
