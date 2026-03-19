@@ -1,0 +1,63 @@
+suites:
+  forecasting_eval:
+    dataset_ref: flow_forecast/forecasting_eval_v1
+    metrics:
+      - forecast_mse
+      - forecast_mape
+  deployment_smoke:
+    dataset_ref: flow_forecast/deployment_smoke_v1
+    metrics:
+      - deployment_success_rate
+  classification_eval:
+    dataset_ref: flow_forecast/classification_eval_v1
+    metrics:
+      - classification_accuracy
+
+domains:
+  forecasting:
+    paths:
+      - flood_forecast/evaluator.py
+      - flood_forecast/pytorch_training.py
+      - flood_forecast/trainer.py
+      - flood_forecast/time_model.py
+      - tests/test_evaluation.py
+      - tests/pytorc_train_tests.py
+    required_suites:
+      - forecasting_eval
+    blockers:
+      - metric: forecast_mse
+        op: "<="
+        value: 500.0
+      - metric: forecast_mape
+        op: "<="
+        value: 0.35
+    reviewers:
+      - forecast-owner
+
+  deployment:
+    paths:
+      - flood_forecast/deployment/**
+      - tests/test_deployment.py
+    required_suites:
+      - deployment_smoke
+    blockers:
+      - metric: deployment_success_rate
+        op: ">="
+        value: 1.0
+    reviewers:
+      - deployment-owner
+
+  classification:
+    paths:
+      - tests/classification_test.json
+      - tests/test_classification2_loader.py
+      - flood_forecast/preprocessing/**
+      - flood_forecast/custom/**
+    required_suites:
+      - classification_eval
+    blockers:
+      - metric: classification_accuracy
+        op: ">="
+        value: 0.80
+    reviewers:
+      - classification-owner
