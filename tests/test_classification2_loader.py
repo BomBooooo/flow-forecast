@@ -27,7 +27,7 @@ class TestGeneralClassificationCSVLoader(unittest.TestCase):
 
     def test_classification_return(self):
         """
-        Tests that the GeneralClassificationLoader returns input and target tensors of expected types and shapes.
+        Smoke-tests that the GeneralClassificationLoader returns input and target tensors of expected types and shapes.
 
         :return: None
         :rtype: None
