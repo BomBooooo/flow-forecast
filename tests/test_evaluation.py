@@ -122,7 +122,7 @@ class EvaluationTest(unittest.TestCase):
 
     def test_evaluator(self):
         """
-        Tests the evaluate_model function on the MultiAttnHeadSimple model,
+        Smoke-tests the evaluate_model function on the MultiAttnHeadSimple model,
         verifying the presence and values of evaluation metrics like MSE and MAPE.
 
         :return: None
